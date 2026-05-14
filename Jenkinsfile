@@ -95,7 +95,7 @@ print(data['data']['data'][sys.argv[1]])
             steps {
                 script {
                     echo "Starting ELK Stack for Logging and Monitoring..."
-                    sh "cd elk && docker compose up -d"
+                    sh "cd elk && docker-compose up -d"
                 }
             }
         }
