@@ -48,7 +48,7 @@ pipeline {
                     
                     // The Vault Dev token
                     def vaultToken = "devops-root-token"
-                    def vaultUrl = "http://host.docker.internal:8200/v1/secret/data/docker-hub"
+                    def vaultUrl = "http://127.0.0.1:8200/v1/secret/data/docker-hub"
                     
                     // Fetch the secret JSON from Vault
                     def vaultResponse = sh(script: "curl -s -H 'X-Vault-Token: ${vaultToken}' ${vaultUrl}", returnStdout: true).trim()
