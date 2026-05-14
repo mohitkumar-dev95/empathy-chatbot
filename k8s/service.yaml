@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: empathy-chatbot-service
+  namespace: default
 spec:
   # LoadBalancer exposes the service outside the cluster (to your localhost)
   type: LoadBalancer

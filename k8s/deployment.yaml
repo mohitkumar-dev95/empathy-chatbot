@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: empathy-chatbot-deployment
+  namespace: default
   labels:
     app: empathy-chatbot
 spec:
@@ -18,7 +19,7 @@ spec:
       containers:
       - name: empathy-chatbot
         # IMPORTANT: Replace 'yourusername' with your actual Docker Hub username!
-        image: atrocks/empathy-chatbot:latest
+        image: mohitkumar95/empathy-chatbot:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
