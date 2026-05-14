@@ -11,7 +11,7 @@ services:
     user: root # Run as root to access the mounted docker.sock from Windows
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "8081:8080"
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
