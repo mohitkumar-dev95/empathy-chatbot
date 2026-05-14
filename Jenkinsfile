@@ -85,8 +85,8 @@ print(data['data']['data'][sys.argv[1]])
                     sh "docker build -t empathy-ansible-deployer -f ansible/Dockerfile.ansible ."
                     
                     echo "Deploying via Ansible Playbook..."
-                    // Mount the host's kubeconfig into the container to allow k8s deployment
-                    sh "docker run --rm -v ~/.kube/config:/root/.kube/config -v \$(pwd):/project empathy-ansible-deployer -i ansible/inventory.yml ansible/playbook.yml"
+                    // Mount the entire .kube dir (not just config file) and use host network to reach Minikube
+                    sh "docker run --rm --network host -v /var/lib/jenkins/.kube:/root/.kube -v \$(pwd):/project empathy-ansible-deployer -i ansible/inventory.yml ansible/playbook.yml"
                 }
             }
         }
