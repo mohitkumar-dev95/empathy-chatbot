@@ -54,8 +54,8 @@ pipeline {
                     def vaultResponse = sh(script: "curl -s -H 'X-Vault-Token: ${vaultToken}' ${vaultUrl}", returnStdout: true).trim()
                     
                     // Extract the username and password from the Vault JSON response using jq
-                    def DOCKER_USER = sh(script: "echo '${vaultResponse}' | docker run --rm -i stedolan/jq -r '.data.data.username'", returnStdout: true).trim()
-                    def DOCKER_PW = sh(script: "echo '${vaultResponse}' | docker run --rm -i stedolan/jq -r '.data.data.password'", returnStdout: true).trim()
+                    def DOCKER_USER = sh(script: "echo '${vaultResponse}' | docker run --rm -i jqlang/jq -r '.data.data.username'", returnStdout: true).trim()
+                    def DOCKER_PW = sh(script: "echo '${vaultResponse}' | docker run --rm -i jqlang/jq -r '.data.data.password'", returnStdout: true).trim()
                     
                     if (DOCKER_USER == "null" || DOCKER_PW == "null") {
                         error("Failed to retrieve credentials from Vault! Did you inject the secret into Vault first?")
