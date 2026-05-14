@@ -69,7 +69,7 @@ print(data['data']['data'][sys.argv[1]])
                     echo "Successfully retrieved credentials from Vault! Logging in..."
                     
                     // Log in securely to Docker Hub
-                    sh "echo \$DOCKER_PW | docker login -u \$DOCKER_USER --password-stdin"
+                    sh "echo ${DOCKER_PW} | docker login -u ${DOCKER_USER} --password-stdin"
                     
                     // Push specific build tag and the latest tag
                     sh "docker push ${DOCKER_IMAGE}:${env.BUILD_ID}"
