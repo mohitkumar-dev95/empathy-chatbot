@@ -53,11 +53,10 @@ pipeline {
                     // Fetch the secret JSON from Vault
                     def vaultResponse = sh(script: "curl -s -H 'X-Vault-Token: ${vaultToken}' ${vaultUrl}", returnStdout: true).trim()
                     
-                    // Extract the username and password from the Vault JSON response using python
-                    sh "echo \"import sys, json; print(json.load(sys.stdin)['data']['data']['username'])\" > parse_user.py"
-                    sh "echo \"import sys, json; print(json.load(sys.stdin)['data']['data']['password'])\" > parse_pass.py"
-                    def DOCKER_USER = sh(script: "echo '${vaultResponse}' | python3 parse_user.py", returnStdout: true).trim()
-                    def DOCKER_PW = sh(script: "echo '${vaultResponse}' | python3 parse_pass.py", returnStdout: true).trim()
+                    // Extract the username and password using Jenkins native JsonSlurper
+                    def props = readJSON text: vaultResponse
+                    def DOCKER_USER = props.data.data.username
+                    def DOCKER_PW = props.data.data.password
                     
                     if (DOCKER_USER == "null" || DOCKER_PW == "null") {
                         error("Failed to retrieve credentials from Vault! Did you inject the secret into Vault first?")
