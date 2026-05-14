@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout from GitHub') {
             steps {
                 // This checks out the code from your GitHub repository
                 checkout scm
