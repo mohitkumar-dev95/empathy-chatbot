@@ -1,0 +1,14 @@
+FROM alpine:3.19
+
+RUN apk add --no-cache python3 py3-pip ansible && \
+    pip install --break-system-packages kubernetes
+
+RUN ansible-galaxy collection install kubernetes.core
+
+WORKDIR /project
+
+# Copy the networking fix script and make it executable
+COPY ansible/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

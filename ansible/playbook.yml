@@ -1,0 +1,7 @@
+---
+- name: Deploy Kubernetes Infrastructure
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+    - role: k8s_deploy

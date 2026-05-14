@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: empathy-chatbot-service
+spec:
+  # LoadBalancer exposes the service outside the cluster (to your localhost)
+  type: LoadBalancer
+  selector:
+    app: empathy-chatbot
+  ports:
+    - protocol: TCP
+      port: 8000       # The port you will access in your web browser
+      targetPort: 8000 # The port the FastAPI container is listening on

@@ -1,0 +1,13 @@
+FROM jenkins/jenkins:lts
+USER root
+
+# Install Docker CLI so Jenkins can run 'docker build' inside the container
+RUN apt-get update && \
+    apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common && \
+    curl -fsSL https://get.docker.com -o get-docker.sh && \
+    sh get-docker.sh
+
+# Give jenkins user permissions to use docker
+RUN usermod -aG docker jenkins
+
+USER jenkins

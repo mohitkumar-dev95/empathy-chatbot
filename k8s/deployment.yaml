@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empathy-chatbot-deployment
+  labels:
+    app: empathy-chatbot
+spec:
+  # Start with 2 identical pods running for high availability
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: empathy-chatbot
+  template:
+    metadata:
+      labels:
+        app: empathy-chatbot
+    spec:
+      containers:
+      - name: empathy-chatbot
+        # IMPORTANT: Replace 'yourusername' with your actual Docker Hub username!
+        image: atrocks/empathy-chatbot:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        # Resource definitions are required for the Autoscaler (HPA) to work
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "1000m"
+            memory: "2Gi"

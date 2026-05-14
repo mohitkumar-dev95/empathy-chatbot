@@ -1,0 +1,8 @@
+torch
+transformers
+datasets
+fastapi
+uvicorn
+pydantic
+pytest
+httpx
