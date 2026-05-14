@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         // Replace 'yourusername' with your actual Docker Hub username!
-        DOCKER_IMAGE = 'mohitkumardev95/empathy-chatbot'
+        DOCKER_IMAGE = 'mohitkumar95/empathy-chatbot'
     }
 
     stages {

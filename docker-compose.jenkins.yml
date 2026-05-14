@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile.jenkins
     container_name: jenkins-devops
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     user: root # Run as root to access the mounted docker.sock from Windows
     restart: unless-stopped
     ports:
