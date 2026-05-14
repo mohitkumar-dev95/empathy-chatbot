@@ -19,7 +19,7 @@ pipeline {
             }
         }
 
-        stage('Automated Tests') {
+        stage('Automated Tests (PyTest Suite)') {
             steps {
                 script {
                     echo "Running automated PyTest suite..."
