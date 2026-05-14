@@ -53,10 +53,9 @@ pipeline {
                     // Fetch the secret JSON from Vault
                     def vaultResponse = sh(script: "curl -s -H 'X-Vault-Token: ${vaultToken}' ${vaultUrl}", returnStdout: true).trim()
                     
-                    // Write the JSON response to a file and parse it using python
-                    sh "echo '${vaultResponse}' > vault.json"
-                    def DOCKER_USER = sh(script: "python3 -c \"import json; print(json.load(open('vault.json'))['data']['data']['username'])\"", returnStdout: true).trim()
-                    def DOCKER_PW = sh(script: "python3 -c \"import json; print(json.load(open('vault.json'))['data']['data']['password'])\"", returnStdout: true).trim()
+                    // Extract the username and password using built-in Linux tools (grep and cut)
+                    def DOCKER_USER = sh(script: "echo '${vaultResponse}' | grep -o '\"username\":\"[^\"]*\"' | cut -d'\"' -f4", returnStdout: true).trim()
+                    def DOCKER_PW = sh(script: "echo '${vaultResponse}' | grep -o '\"password\":\"[^\"]*\"' | cut -d'\"' -f4", returnStdout: true).trim()
                     
                     if (DOCKER_USER == "null" || DOCKER_PW == "null") {
                         error("Failed to retrieve credentials from Vault! Did you inject the secret into Vault first?")
