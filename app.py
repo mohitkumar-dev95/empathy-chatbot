@@ -17,4 +17,4 @@ async def chat_endpoint(request: ChatRequest):
 
 @app.get("/")
 async def root():
-    return {"message": "Empathy Analyzer API is running. Send POST requests to /chat"}
+    return {"message": "Empathy Analyzer API is running...Send POST requests to /chat"}
