@@ -1,4 +1,4 @@
-# this is chatbot
+# this is chatbot demo
 from fastapi import FastAPI
 from pydantic import BaseModel
 from chatbot import generate_response
