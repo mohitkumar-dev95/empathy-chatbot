@@ -6,7 +6,7 @@ from chatbot import generate_response
 
 app = FastAPI(title="Empathy Analyzer API")
 
-# --- ELK LOGGING CONFIG ---
+# --- ELK LOGGING CONFIG 
 LOGSTASH_IP = "192.168.49.1"
 LOGSTASH_PORT = 5000
 
